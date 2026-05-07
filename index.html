@@ -3,600 +3,1942 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>LUCK CRUPIERS | Contacto de Atención</title>
 
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:Arial, Helvetica, sans-serif;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-    body{
-      min-height:100vh;
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
+    body {
+      min-height: 100vh;
       background:
-        radial-gradient(circle at top, rgba(255,210,90,.12), transparent 35%),
-        linear-gradient(160deg,#120202 0%,#2a0505 45%,#4d0a0a 100%);
-      color:white;
+        radial-gradient(circle at center, rgba(255, 190, 60, 0.18), transparent 34%),
+        linear-gradient(160deg, #050303 0%, #180606 42%, #3b0707 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      overflow-x: hidden;
+      position: relative;
+      isolation: isolate;
+    }
+    .cinema-video-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -30;
+      overflow: hidden;
+      background: #050202;
+      pointer-events: none;
     }
 
-    .bg-lights{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      overflow:hidden;
-      z-index:-1;
+    .cinema-video-bg video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.045);
+
+      filter:
+        brightness(.48)
+        contrast(1.22)
+        saturate(1.55)
+        sepia(.22)
+        hue-rotate(-28deg);
+      transition: opacity 1.65s ease-in-out, transform 7s ease-in-out;
     }
 
-    .bg-lights span{
-      position:absolute;
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:#ffd36b;
-      box-shadow:
-        0 0 10px #ffd36b,
-        0 0 20px #ffd36b,
-        0 0 40px #ff9b00;
-      animation:float 8s linear infinite;
-      opacity:.7;
+    .cinema-video-bg video.active {
+      opacity: 1;
+      transform: scale(1.095);
     }
 
-    .bg-lights span:nth-child(1){left:5%;animation-delay:0s;}
-    .bg-lights span:nth-child(2){left:15%;animation-delay:1s;}
-    .bg-lights span:nth-child(3){left:25%;animation-delay:2s;}
-    .bg-lights span:nth-child(4){left:35%;animation-delay:3s;}
-    .bg-lights span:nth-child(5){left:45%;animation-delay:4s;}
-    .bg-lights span:nth-child(6){left:55%;animation-delay:5s;}
-    .bg-lights span:nth-child(7){left:65%;animation-delay:2s;}
-    .bg-lights span:nth-child(8){left:75%;animation-delay:4s;}
-    .bg-lights span:nth-child(9){left:85%;animation-delay:1s;}
-    .bg-lights span:nth-child(10){left:95%;animation-delay:3s;}
-
-    @keyframes float{
-      from{
-        transform:translateY(100vh) scale(.6);
-        opacity:0;
-      }
-      15%{
-        opacity:.8;
-      }
-      to{
-        transform:translateY(-120vh) scale(1.2);
-        opacity:0;
-      }
-    }
-
-    .card{
-      width:100%;
-      max-width:430px;
-      border-radius:28px;
-      overflow:hidden;
-      position:relative;
-      border:1px solid rgba(255,215,120,.28);
+    .cinema-color-grade {
+      position: fixed;
+      inset: 0;
+      z-index: -24;
+      pointer-events: none;
       background:
-        radial-gradient(circle at top, rgba(255,215,120,.08), transparent 35%),
-        linear-gradient(180deg, rgba(30,4,4,.96), rgba(10,3,3,.98));
+        linear-gradient(180deg, rgba(20,0,0,.38), rgba(0,0,0,.70)),
+        radial-gradient(circle at 50% 34%, rgba(120, 0, 0, .64), transparent 62%),
+        radial-gradient(circle at 18% 78%, rgba(70, 0, 0, .68), transparent 56%),
+        radial-gradient(circle at 82% 82%, rgba(255, 190, 72, .20), transparent 58%);
+      mix-blend-mode: multiply;
+      opacity: .98;
+      animation: cinemaGlowMove 9s ease-in-out infinite alternate;
+    }
+
+    .cinema-vignette {
+      position: fixed;
+      inset: 0;
+      z-index: -23;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at center, transparent 0 58%, rgba(0,0,0,.48) 100%),
+        linear-gradient(to bottom, rgba(0,0,0,.08), rgba(0,0,0,.48));
+      opacity: .82;
+      animation: none;
+    }
+
+    .wins-red-branding {
+      position: fixed;
+      inset: 0;
+      z-index: -25;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(255, 211, 107, .16), transparent 35%),
+        linear-gradient(135deg, rgba(10,0,0,.86), rgba(95,0,0,.62) 48%, rgba(5,0,0,.88));
+      mix-blend-mode: color;
+      opacity: .90;
+    }
+
+    .cinema-grain {
+      position: fixed;
+      inset: 0;
+      z-index: -22;
+      pointer-events: none;
+      opacity: .055;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,.9) 0 1px, transparent 1px),
+        radial-gradient(circle at 80% 60%, rgba(255,255,255,.8) 0 1px, transparent 1px),
+        radial-gradient(circle at 45% 75%, rgba(255,255,255,.7) 0 1px, transparent 1px);
+      background-size: 80px 80px, 120px 120px, 160px 160px;
+      animation: grainMove .9s steps(2) infinite;
+    }
+
+    .cinema-light-bars {
+      position: fixed;
+      inset: -20%;
+      z-index: -21;
+      pointer-events: none;
+      background:
+        conic-gradient(from 210deg at 50% 50%,
+          transparent 0deg,
+          rgba(255,211,107,.08) 26deg,
+          transparent 54deg,
+          transparent 150deg,
+          rgba(143,8,8,.18) 184deg,
+          transparent 226deg,
+          rgba(255,211,107,.07) 292deg,
+          transparent 360deg);
+      filter: blur(2px);
+      opacity: .72;
+      animation: cinemaRotate 36s linear infinite;
+    }
+
+    @keyframes cinemaGlowMove {
+      from { transform: translate3d(-2%, 1%, 0) scale(1); opacity: .68; }
+      to { transform: translate3d(2%, -1%, 0) scale(1.04); opacity: .94; }
+    }
+
+    @keyframes cinemaSweep {
+      from { transform: translateX(-8%) skewX(-5deg); opacity: .50; }
+      to { transform: translateX(8%) skewX(5deg); opacity: .88; }
+    }
+
+    @keyframes grainMove {
+      0% { transform: translate(0,0); }
+      100% { transform: translate(12px,-10px); }
+    }
+
+    @keyframes cinemaRotate {
+      to { transform: rotate(360deg); }
+    }
+
+    .casino-cinema-assets {
+      position: fixed;
+      inset: 0;
+      z-index: -20;
+      pointer-events: none;
+      overflow: hidden;
+      perspective: 1200px;
+    }
+
+    .cinema-roulette {
+      position: absolute;
+      width: min(760px, 118vw);
+      height: min(760px, 118vw);
+      left: 50%;
+      bottom: -470px;
+      transform: translateX(-50%) rotateX(66deg);
+      border-radius: 50%;
+      opacity: .36;
+      background:
+        radial-gradient(circle at center, rgba(255,211,107,.22), rgba(0,0,0,.12)),
+        repeating-conic-gradient(from 6deg,
+          #b30f0f 0deg 9deg,
+          #0b0707 9deg 18deg,
+          #d2a13b 18deg 20deg);
       box-shadow:
-        0 0 40px rgba(255,190,70,.12),
-        0 25px 60px rgba(0,0,0,.45);
-      padding:30px 22px;
-      text-align:center;
+        0 0 75px rgba(255,211,107,.22),
+        inset 0 0 42px rgba(0,0,0,.75);
+      animation: cinemaRouletteSpin 34s linear infinite;
     }
 
-    .logo{
-      margin-bottom:18px;
+    .cinema-roulette::before {
+      content: "";
+      position: absolute;
+      inset: 16%;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at center, rgba(255,211,107,.55) 0 10%, rgba(54,10,10,.65) 11% 35%, transparent 36%),
+        repeating-conic-gradient(from 0deg, rgba(255,211,107,.55) 0 4deg, transparent 4deg 16deg);
+      border: 8px solid rgba(255,211,107,.28);
+      box-shadow: inset 0 0 28px rgba(0,0,0,.55);
     }
 
-    .logo-main{
-      font-size:48px;
-      font-weight:900;
-      letter-spacing:2px;
-      color:#b50f10;
+    .cinema-roulette::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, transparent 0 45%, rgba(0,0,0,.40) 72%, rgba(0,0,0,.78));
+    }
+
+    @keyframes cinemaRouletteSpin {
+      from { transform: translateX(-50%) rotateX(66deg) rotateZ(0deg); }
+      to { transform: translateX(-50%) rotateX(66deg) rotateZ(360deg); }
+    }
+
+    .cinema-dust span {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #ffd36b;
+      box-shadow: 0 0 16px rgba(255,211,107,.95);
+      opacity: 0;
+      animation: cinemaDustRise 7s linear infinite;
+    }
+
+    .cinema-dust span:nth-child(1){ left: 6%; bottom: -10px; animation-delay: .1s; }
+    .cinema-dust span:nth-child(2){ left: 14%; bottom: -10px; animation-delay: 1.3s; }
+    .cinema-dust span:nth-child(3){ left: 25%; bottom: -10px; animation-delay: .7s; }
+    .cinema-dust span:nth-child(4){ left: 38%; bottom: -10px; animation-delay: 1.9s; }
+    .cinema-dust span:nth-child(5){ left: 51%; bottom: -10px; animation-delay: .3s; }
+    .cinema-dust span:nth-child(6){ left: 64%; bottom: -10px; animation-delay: 2.5s; }
+    .cinema-dust span:nth-child(7){ left: 78%; bottom: -10px; animation-delay: 1.1s; }
+    .cinema-dust span:nth-child(8){ left: 91%; bottom: -10px; animation-delay: 3.0s; }
+
+    @keyframes cinemaDustRise {
+      0% { transform: translateY(0) scale(.55); opacity: 0; }
+      18% { opacity: .62; }
+      100% { transform: translateY(-108vh) scale(1.15); opacity: 0; }
+    }
+
+    .cinema-roulette {
+      display: none !important;
+    }
+
+    .cinema-light-bars {
+      display: none !important;
+    }
+
+    .casino-fx {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -19;
+    }
+
+    .casino-fx > span {
+      position: absolute;
+      top: -170px;
+      opacity: 0;
+      will-change: transform, opacity;
+      animation-name: casinoFall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      filter: none !important;
+      box-shadow: none !important;
+    }
+
+    /* FICHAS 3D REALISTAS: VARIANTE ROJA/BLANCA Y NEGRA/BLANCA */
+    .fall-chip {
+      width: 118px;
+      height: 118px;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+      animation-name: casinoFall, chipSpin !important;
+      animation-timing-function: cubic-bezier(.22,.61,.36,1), linear !important;
+      animation-iteration-count: infinite, infinite !important;
+    }
+
+    .chip-face {
+      position: absolute !important;
+      inset: 0;
+      top: 0 !important;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 46px;
+      font-weight: 950;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      animation: none !important;
+      opacity: 1 !important;
+      filter: none !important;
+      overflow: hidden;
+      box-shadow:
+        inset 0 0 0 4px rgba(255,255,255,.18),
+        inset 0 0 24px rgba(0,0,0,.28),
+        0 0 18px rgba(255,211,107,.18) !important;
+    }
+
+    .chip-face::before {
+      content: "";
+      position: absolute;
+      inset: 13px;
+      border-radius: 50%;
+      border: 5px dashed rgba(255,255,255,.82);
+      opacity: .95;
+      z-index: 1;
+    }
+
+    .chip-face::after {
+      content: "";
+      position: absolute;
+      inset: -35%;
+      background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.42) 48%, transparent 61%);
+      transform: translateX(-44%) rotate(12deg);
+      opacity: .36;
+      z-index: 2;
+    }
+
+    .chip-face .chip-symbol {
+      position: relative;
+      z-index: 3;
+      line-height: 1;
+      text-shadow: 0 2px 3px rgba(0,0,0,.38);
+    }
+
+    .chip-face.front {
+      transform: rotateY(0deg);
+    }
+
+    .chip-face.back {
+      transform: rotateY(180deg);
+    }
+    .chip-red .chip-face.front {
+      color: #8f0707;
+      background:
+        radial-gradient(circle at center, #fff0bf 0 28%, transparent 29%),
+        repeating-conic-gradient(
+          from 8deg,
+          #8f0707 0deg 23deg,
+          #fff2cf 23deg 41deg,
+          #5d0303 41deg 64deg
+        );
+      border: 6px solid #8f0707;
+    }
+
+    .chip-red .chip-face.back {
+      color: #fff2cf;
+      background:
+        radial-gradient(circle at center, #8f0707 0 29%, transparent 30%),
+        repeating-conic-gradient(
+          from 8deg,
+          #fff2cf 0deg 20deg,
+          #8f0707 20deg 42deg,
+          #fff2cf 42deg 62deg
+        );
+      border: 6px solid #fff2cf;
+    }
+
+    /* Variante negra/blanca */
+    .chip-black .chip-face.front {
+      color: #050505;
+      background:
+        radial-gradient(circle at center, #fff2cf 0 28%, transparent 29%),
+        repeating-conic-gradient(
+          from 8deg,
+          #050505 0deg 23deg,
+          #fff2cf 23deg 41deg,
+          #050505 41deg 64deg
+        );
+      border: 6px solid #050505;
+    }
+
+    .chip-black .chip-face.back {
+      color: #fff2cf;
+      background:
+        radial-gradient(circle at center, #050505 0 29%, transparent 30%),
+        repeating-conic-gradient(
+          from 8deg,
+          #fff2cf 0deg 20deg,
+          #050505 20deg 42deg,
+          #fff2cf 42deg 62deg
+        );
+      border: 6px solid #fff2cf;
+    }
+
+    .chip-20 { animation-duration: 12s, 1.55s !important; animation-delay: 0s, 0s !important; }
+    .chip-25 { animation-duration: 15.5s, 1.85s !important; animation-delay: 3s, .25s !important; }
+    .chip-50 { animation-duration: 13s, 1.68s !important; animation-delay: 4.1s, .4s !important; }
+    .chip-100 { animation-duration: 13.5s, 1.78s !important; animation-delay: 1.7s, .1s !important; }
+
+    @keyframes chipSpin {
+      0% { transform: rotateY(0deg) rotateX(0deg); }
+      50% { transform: rotateY(180deg) rotateX(8deg); }
+      100% { transform: rotateY(360deg) rotateX(0deg); }
+    }
+    .fall-card {
+      width: 74px;
+      height: 104px;
+      border-radius: 11px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.98), rgba(232,232,232,.95));
+      border: 1px solid rgba(255,255,255,.72);
+      box-shadow: none;
+    }
+
+    .fall-card::before {
+      position: absolute;
+      top: 8px;
+      left: 9px;
+      font-size: 23px;
+      font-weight: 950;
+    }
+
+    .fall-card::after {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 48px;
+      font-weight: 950;
+    }
+
+    .card-heart::before,
+    .card-heart::after { content: "♥"; color: #8f0707; }
+
+    .card-diamond::before,
+    .card-diamond::after { content: "♦"; color: #8f0707; }
+
+    .card-spade::before,
+    .card-spade::after { content: "♠"; color: #050505; }
+
+    .card-club::before,
+    .card-club::after { content: "♣"; color: #050505; }
+    .fall-dice {
+      width: 82px;
+      height: 82px;
+      border-radius: 17px;
+      background: linear-gradient(145deg, #e51515, #650505);
+      border: 2px solid rgba(255,255,255,.34);
+      box-shadow:
+        inset 7px 7px 16px rgba(255,255,255,.14),
+        inset -7px -7px 18px rgba(0,0,0,.38);
+    }
+
+    .fall-dice::before {
+      content: "";
+      position: absolute;
+      inset: 15px;
+      background:
+        radial-gradient(circle at 20% 20%, #fff 0 5px, transparent 6px),
+        radial-gradient(circle at 80% 20%, #fff 0 5px, transparent 6px),
+        radial-gradient(circle at 50% 50%, #fff 0 5px, transparent 6px),
+        radial-gradient(circle at 20% 80%, #fff 0 5px, transparent 6px),
+        radial-gradient(circle at 80% 80%, #fff 0 5px, transparent 6px);
+    }
+
+    .casino-fx > span:nth-child(1) { left: 5%; animation-duration: 12s; animation-delay: 0s; }
+    .casino-fx > span:nth-child(2) { left: 15%; animation-duration: 15s; animation-delay: 2.3s; }
+    .casino-fx > span:nth-child(3) { left: 28%; animation-duration: 13s; animation-delay: 4.1s; }
+    .casino-fx > span:nth-child(4) { left: 40%; animation-duration: 17s; animation-delay: 1.2s; }
+    .casino-fx > span:nth-child(5) { left: 54%; animation-duration: 14s; animation-delay: 3.4s; }
+    .casino-fx > span:nth-child(6) { left: 66%; animation-duration: 16s; animation-delay: 5.2s; }
+    .casino-fx > span:nth-child(7) { left: 78%; animation-duration: 13.5s; animation-delay: 1.7s; }
+    .casino-fx > span:nth-child(8) { left: 88%; animation-duration: 18s; animation-delay: 6.1s; }
+    .casino-fx > span:nth-child(9) { left: 96%; animation-duration: 15.5s; animation-delay: 3s; }
+
+    @keyframes casinoFall {
+      0% {
+        translate: 0 -70px;
+        rotate: 0deg;
+        scale: .78;
+        opacity: 0;
+      }
+      10% {
+        opacity: .62;
+      }
+      62% {
+        opacity: .50;
+      }
+      100% {
+        translate: -42px 120vh;
+        rotate: 330deg;
+        scale: 1.08;
+        opacity: 0;
+      }
+    }
+
+    .video-loading-fallback {
+      position: fixed;
+      inset: 0;
+      z-index: -31;
+      background:
+        radial-gradient(circle at center, rgba(255, 190, 60, 0.18), transparent 34%),
+        linear-gradient(160deg, #050303 0%, #180606 42%, #3b0707 100%);
+    }
+
+    @media(max-width:720px){
+      .cinema-video-bg video {
+        object-position: center;
+      }
+
+      .cinema-roulette {
+        width: 450px;
+        height: 450px;
+        bottom: -305px;
+        opacity: .30;
+      }
+
+      .fall-chip {
+        width: 88px;
+        height: 88px;
+      }
+
+      .chip-face {
+        font-size: 34px;
+      }
+
+      .chip-face.front,
+      .chip-face.back {
+        border-width: 5px;
+      }
+
+      .chip-face::before {
+        inset: 10px;
+        border-width: 4px;
+      }
+
+      .fall-card {
+        width: 54px;
+        height: 78px;
+      }
+
+      .fall-card::before {
+        font-size: 17px;
+      }
+
+      .fall-card::after {
+        font-size: 34px;
+      }
+
+      .fall-dice {
+        width: 62px;
+        height: 62px;
+      }
+
+      .casino-fx span:nth-child(3),
+      .casino-fx span:nth-child(6),
+      .casino-fx span:nth-child(9) {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cinema-video-bg video,
+      .cinema-color-grade,
+      .cinema-vignette,
+      .cinema-grain,
+      .cinema-light-bars,
+      .cinema-roulette,
+      .cinema-dust span,
+      .casino-fx > span,
+      .casino-fx span {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition: none !important;
+      }
+    }
+
+    .page {
+      width: 100%;
+      max-width: 430px;
+      position: relative;
+    }
+
+    .glow {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      background: rgba(255, 196, 72, 0.16);
+      filter: blur(60px);
+      border-radius: 50%;
+      top: -90px;
+      right: -90px;
+      z-index: 0;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(255, 210, 110, 0.42);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top, rgba(255, 211, 107, .08), transparent 34%),
+        linear-gradient(180deg, rgba(30, 4, 4, 0.96), rgba(7, 3, 3, 0.97));
+      box-shadow:
+        0 0 42px rgba(255, 191, 64, 0.16),
+        0 20px 50px rgba(0,0,0,.38),
+        inset 0 0 28px rgba(255, 211, 100, 0.07);
+      padding: 28px 22px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .brand {
+      margin-bottom: 18px;
+    }
+
+    .brand .wins {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #b70f12;
       text-shadow:
-        0 0 10px rgba(255,210,100,.4),
-        0 0 24px rgba(255,190,70,.3);
+        0 2px 0 #ffd36b,
+        0 0 14px rgba(255, 202, 82, 0.65),
+        0 0 32px rgba(183, 15, 18, 0.65);
     }
 
-    .logo-sub{
-      color:#ffd36b;
-      font-style:italic;
-      margin-top:-6px;
-      font-size:22px;
+    .brand .crupiers {
+      font-size: 22px;
+      font-family: Georgia, serif;
+      font-style: italic;
+      color: #ffd36b;
+      margin-top: -4px;
+      text-shadow: 0 0 12px rgba(255, 200, 80, 0.55);
     }
 
-    .badge{
-      display:inline-block;
-      padding:9px 15px;
-      border-radius:999px;
-      background:rgba(255,210,100,.08);
-      border:1px solid rgba(255,210,100,.25);
-      color:#ffd36b;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.6px;
-      margin-bottom:18px;
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 211, 107, 0.12);
+      border: 1px solid rgba(255, 211, 107, 0.35);
+      color: #ffd36b;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 18px;
     }
 
-    h1{
-      font-size:31px;
-      line-height:1.08;
-      margin-bottom:18px;
-      text-transform:uppercase;
+    h1 {
+      font-size: 31px;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      text-transform: uppercase;
     }
 
-    h1 span{
-      color:#ffd36b;
+    h1 span {
+      color: #ffd36b;
+      text-shadow: 0 0 18px rgba(255, 211, 107, 0.5);
     }
 
-    .highlight-box{
-      border-radius:22px;
-      padding:18px;
-      margin-bottom:20px;
+    .amount-box {
+      margin: 20px 0;
+      padding: 18px 14px;
+      border-radius: 22px;
       background:
-        linear-gradient(180deg, rgba(120,8,8,.55), rgba(30,4,4,.8));
-      border:1px solid rgba(255,210,100,.22);
+        radial-gradient(circle at center, rgba(255, 211, 107, .08), transparent 58%),
+        linear-gradient(180deg, rgba(128, 8, 8, 0.50), rgba(31, 4, 4, 0.76));
+      border: 1px solid rgba(255, 211, 107, 0.28);
     }
 
-    .highlight-small{
-      color:#ffe7ae;
-      font-size:13px;
-      margin-bottom:6px;
-      text-transform:uppercase;
+    .amount-label {
+      font-size: 13px;
+      color: #f5dba0;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
 
-    .highlight-main{
-      font-size:44px;
-      font-weight:900;
-      color:#ffd36b;
-      text-shadow:0 0 18px rgba(255,210,100,.4);
+    .amount {
+      font-size: 46px;
+      font-weight: 900;
+      color: #ffd36b;
+      text-shadow: 0 0 18px rgba(255, 200, 80, 0.55);
     }
 
-    .subtitle{
-      color:#ffe9c0;
-      line-height:1.5;
-      font-size:15px;
-      margin-bottom:22px;
+    .subtitle {
+      font-size: 16px;
+      color: #f8e9c9;
+      line-height: 1.45;
+      margin-bottom: 20px;
     }
 
-    .steps{
-      display:grid;
-      gap:10px;
-      margin-bottom:22px;
-      text-align:left;
+    .steps {
+      display: grid;
+      gap: 10px;
+      margin: 20px 0 22px;
+      text-align: left;
     }
 
-    .step{
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,210,100,.12);
-      border-radius:15px;
-      padding:13px;
-      color:#fff3d6;
-      font-size:14px;
+    .step {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 15px;
+      padding: 12px;
+      font-size: 14px;
+      color: #fff7e7;
     }
 
-    .step b{
-      color:#ffd36b;
+    .step b {
+      color: #ffd36b;
     }
 
-    .btn{
-      width:100%;
-      border:none;
-      cursor:pointer;
-      border-radius:18px;
-      padding:16px;
-      font-size:16px;
-      font-weight:900;
-      text-transform:uppercase;
-      margin-top:10px;
-      transition:.2s;
+    .cta {
+      display: block;
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      color: #1b0707;
+      background: linear-gradient(180deg, #fff0b5 0%, #e5aa32 58%, #9b5d12 100%);
+      padding: 16px 18px;
+      border-radius: 18px;
+      font-size: 17px;
+      font-weight: 900;
+      text-transform: uppercase;
+      box-shadow: 0 0 24px rgba(255, 204, 84, 0.42);
+      margin-top: 10px;
+    }
+
+    .webchat-btn {
       background:
-        linear-gradient(180deg,#fff0b5 0%,#e5aa32 58%,#9b5d12 100%);
-      color:#1b0707;
-      box-shadow:0 0 22px rgba(255,200,80,.28);
+        linear-gradient(180deg, #fff0b5 0%, #e5aa32 58%, #9b5d12 100%);
+      color: #1b0707;
+      border: 1px solid rgba(255, 211, 107, 0.50);
+      box-shadow:
+        0 0 24px rgba(255, 204, 84, 0.42),
+        inset 0 1px 0 rgba(255,255,255,.38);
     }
 
-    .btn:hover{
-      transform:translateY(-2px);
+    /* Animaciones premium al tocar botones */
+    .cta {
+      position: relative;
+      overflow: hidden;
+      transform: translateZ(0);
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        filter .18s ease;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .footer{
-      margin-top:16px;
-      color:rgba(255,255,255,.45);
-      font-size:12px;
+    .cta::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.42) 45%, transparent 62%);
+      transform: translateX(-130%);
+      opacity: 0;
+      pointer-events: none;
     }
 
-    .overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.84);
-      backdrop-filter:blur(8px);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-      z-index:9999;
+    .cta:hover {
+      transform: translateY(-2px) scale(1.01);
+      filter: brightness(1.06);
     }
 
-    .overlay.active{
-      display:flex;
+    .cta:active,
+    .cta.is-pressing {
+      transform: scale(.965);
+      filter: brightness(1.13);
     }
 
-    .overlay-box{
-      width:min(920px,100%);
-      max-height:92vh;
-      overflow:auto;
-      border-radius:28px;
-      padding:32px 24px;
-      background:
-        radial-gradient(circle at top, rgba(255,215,100,.1), transparent 30%),
-        linear-gradient(180deg, rgba(25,4,4,.98), rgba(10,3,3,.98));
-      border:1px solid rgba(255,210,100,.22);
+    .cta.is-pressing::before {
+      opacity: 1;
+      animation: buttonShine .58s ease-out;
     }
 
-    .overlay-title{
-      text-align:center;
-      font-size:34px;
-      margin-bottom:10px;
-      text-transform:uppercase;
+    @keyframes buttonShine {
+      from { transform: translateX(-130%); }
+      to { transform: translateX(130%); }
     }
 
-    .overlay-title span{
-      color:#ffd36b;
+    .cta .ripple {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      width: 18px;
+      height: 18px;
+      transform: translate(-50%, -50%) scale(0);
+      background: rgba(255,255,255,.55);
+      animation: ripple .62s ease-out forwards;
+      mix-blend-mode: screen;
     }
 
-    .overlay-sub{
-      text-align:center;
-      color:#ffe7ba;
-      margin-bottom:22px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-    }
-
-    .line-card{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      text-decoration:none;
-      border-radius:18px;
-      padding:14px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,210,100,.12);
-      transition:.2s;
-    }
-
-    .line-card:hover{
-      transform:scale(1.02);
-      border-color:rgba(255,210,100,.3);
-    }
-
-    .line-icon{
-      width:42px;
-      height:42px;
-      border-radius:12px;
-      display:grid;
-      place-items:center;
-      font-size:18px;
-      font-weight:900;
-      background:
-        linear-gradient(180deg,#fff0b5 0%,#e5aa32 58%,#9b5d12 100%);
-      color:#1b0707;
-    }
-
-    .line-label{
-      color:#ffd36b;
-      font-size:11px;
-      font-weight:900;
-      letter-spacing:.6px;
-    }
-
-    .line-number{
-      color:white;
-      font-size:15px;
-      font-weight:800;
-    }
-
-    .close{
-      position:absolute;
-      top:18px;
-      right:18px;
-      width:36px;
-      height:36px;
-      border-radius:50%;
-      border:none;
-      cursor:pointer;
-      font-size:22px;
-      background:rgba(255,255,255,.08);
-      color:#ffd36b;
-    }
-
-    @media(max-width:700px){
-      .grid{
-        grid-template-columns:1fr;
+    @keyframes ripple {
+      to {
+        transform: translate(-50%, -50%) scale(18);
+        opacity: 0;
       }
     }
+
+    .note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.56);
+      line-height: 1.35;
+    }
+
+    .footer {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.52);
+    }
+
+    .oasis-overlay {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.82);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      padding: 18px;
+    }
+
+    .oasis-overlay.active {
+      display: flex;
+    }
+
+    .oasis-box {
+      width: min(920px, 100%);
+      max-height: 92vh;
+      overflow: auto;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at center, rgba(255, 190, 60, 0.16), transparent 34%),
+        linear-gradient(180deg, rgba(20, 5, 5, 0.98), rgba(7, 4, 4, 0.98));
+      border: 1px solid rgba(255, 210, 110, 0.35);
+      box-shadow: 0 0 42px rgba(255, 191, 64, 0.18);
+      padding: 38px 26px;
+      text-align: center;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 211, 107, 0.35);
+      background: rgba(255, 211, 107, 0.08);
+      color: #ffd36b;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .oasis-title {
+      font-size: 36px;
+      line-height: 1.05;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .oasis-title span {
+      color: #ffd36b;
+      text-shadow: 0 0 18px rgba(255, 211, 107, 0.55);
+    }
+
+    .oasis-text {
+      color: #f8e9c9;
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    .oasis-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .oasis-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+      text-align: left;
+      padding: 13px;
+      border-radius: 15px;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,211,107,0.16);
+    }
+
+    .oasis-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #fff0b5 0%, #e5aa32 58%, #9b5d12 100%);
+      color: #1b0707;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+    }
+
+    .oasis-label {
+      color: #ffd36b;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .7px;
+    }
+
+    .oasis-number {
+      font-weight: 900;
+      font-size: 15px;
+    }
+
+    .webchat-glow {
+      display: none;
+      position: fixed;
+      right: 16px;
+      bottom: 12px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,211,107,0.58) 0%, rgba(130,8,8,0.18) 55%, transparent 75%);
+      filter: blur(6px);
+      z-index: 9998;
+      pointer-events: none;
+      animation: glowPulse 1.4s infinite alternate;
+    }
+
+    body.webchat-visible .webchat-glow {
+      display: block;
+    }
+
+    @keyframes glowPulse {
+      from { opacity: .55; transform: scale(0.92); }
+      to { opacity: .95; transform: scale(1.05); }
+    }
+
+    .webchat-overlay {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.82);
+      backdrop-filter: blur(8px);
+      z-index: 10000;
+      padding: 18px;
+    }
+
+    .webchat-overlay.active { display: flex; }
+
+    .webchat-box {
+      width: min(520px, 100%);
+      border-radius: 24px;
+      border: 1px solid rgba(255, 210, 110, 0.35);
+      background: linear-gradient(180deg, rgba(20, 5, 5, 0.98), rgba(7, 4, 4, 0.98));
+      box-shadow: 0 0 42px rgba(255, 191, 64, 0.18);
+      padding: 28px 22px;
+      text-align: center;
+      position: relative;
+    }
+
+    .webchat-helper {
+      display: none;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 211, 107, 0.35);
+      background: rgba(255, 211, 107, 0.08);
+      color: #ffe8b5;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .webchat-pointer {
+      display: none;
+      position: fixed;
+      right: 140px;
+      bottom: 62px;
+      z-index: 10000;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0,0,0,0.78);
+      border: 1px solid rgba(255,211,107,.4);
+      border-radius: 14px;
+      padding: 10px 12px;
+    }
+
+    .webchat-pointer.active { display: flex; }
+
+    .pointer-arrow {
+      font-size: 28px;
+      color: #ffd36b;
+      animation: arrowPulse .8s infinite alternate;
+    }
+
+    .pointer-text {
+      color: #ffd36b;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: .4px;
+    }
+
+    @keyframes arrowPulse {
+      from { transform: translateX(0); }
+      to { transform: translateX(6px);}
+    }
+
+    .webchat-helper.active {
+      display: block;
+      animation: pulseGlow 1.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      from { box-shadow: 0 0 0 rgba(255,211,107,0.0); }
+      to { box-shadow: 0 0 18px rgba(255,211,107,0.35); }
+    }
+
+    [id*="callbell"],
+    [class*="callbell"],
+    iframe[src*="callbell"],
+    iframe[src*="livechat"] {
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: opacity .2s ease;
+    }
+
+    body.webchat-visible [id*="callbell"],
+    body.webchat-visible [class*="callbell"],
+    body.webchat-visible iframe[src*="callbell"],
+    body.webchat-visible iframe[src*="livechat"] {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
+    @media(max-width:720px){
+      .oasis-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* =========================================================
+       OVERRIDE FINAL FORMATO LUCK
+       Rojo zafiro / negro profundo / dorado brillante.
+       Sin verde en interfaz.
+       ========================================================= */
+
+    .cta,
+    .webchat-btn,
+    #abrirWebchat,
+    #abrirChatAhora {
+      background: linear-gradient(180deg, #fff0b5 0%, #e5aa32 58%, #9b5d12 100%) !important;
+      color: #1b0707 !important;
+      border: 1px solid rgba(255, 211, 107, .52) !important;
+      box-shadow:
+        0 0 26px rgba(255, 204, 84, .42),
+        inset 0 1px 0 rgba(255,255,255,.40) !important;
+    }
+
+    .card {
+      border-color: rgba(255, 211, 107, .46) !important;
+      background:
+        radial-gradient(circle at top, rgba(255, 211, 107, .10), transparent 34%),
+        linear-gradient(180deg, rgba(34, 4, 4, .97), rgba(7, 2, 2, .98)) !important;
+    }
+
+    .amount-box,
+    .step,
+    .badge {
+      border-color: rgba(255, 211, 107, .34) !important;
+    }
+
+    .step {
+      background: rgba(42, 5, 5, .58) !important;
+    }
+
+    .cinema-grain {
+      opacity: .035 !important;
+    }
+
+
+    .page,
+    .card,
+    .brand,
+    .badge,
+    h1,
+    h1 span,
+    .amount-box,
+    .amount-label,
+    .amount,
+    .subtitle,
+    .steps,
+    .step,
+    .step span,
+    .step b,
+    .cta,
+    .note,
+    .footer,
+    .oasis-box,
+    .oasis-title,
+    .oasis-title span,
+    .oasis-text,
+    .oasis-card,
+    .oasis-label,
+    .oasis-number,
+    .webchat-box,
+    .webchat-helper,
+    .webchat-pointer,
+    .pointer-text,
+    .pointer-arrow,
+    .close {
+      color: #ffe8a8 !important;
+    }
+
+    .card {
+      border: 1px solid rgba(255, 211, 107, .48) !important;
+      background:
+        radial-gradient(circle at top, rgba(255, 211, 107, .10), transparent 34%),
+        linear-gradient(180deg, rgba(38, 4, 5, .97), rgba(9, 2, 2, .985)) !important;
+      box-shadow:
+        0 0 42px rgba(255, 191, 64, .16),
+        0 20px 50px rgba(0,0,0,.40),
+        inset 0 0 28px rgba(255, 211, 100, .07) !important;
+    }
+
+    .brand .wins {
+      color: #b70f12 !important;
+      text-shadow:
+        0 2px 0 #ffd36b,
+        0 0 14px rgba(255, 202, 82, .65),
+        0 0 32px rgba(183, 15, 18, .65) !important;
+    }
+
+    .brand .crupiers,
+    h1 span,
+    .amount,
+    .amount-label,
+    .badge,
+    .step b,
+    .oasis-title span,
+    .oasis-label {
+      color: #ffd36b !important;
+    }
+
+    h1,
+    .subtitle,
+    .step span,
+    .note,
+    .footer,
+    .oasis-text,
+    .oasis-number {
+      color: #ffe8a8 !important;
+    }
+
+    .badge {
+      background: rgba(95, 5, 7, .46) !important;
+      border: 1px solid rgba(255, 211, 107, .42) !important;
+    }
+
+    .amount-box {
+      background:
+        radial-gradient(circle at center, rgba(255, 211, 107, .08), transparent 58%),
+        linear-gradient(180deg, rgba(128, 8, 8, .55), rgba(31, 4, 4, .82)) !important;
+      border: 1px solid rgba(255, 211, 107, .34) !important;
+    }
+
+    .step {
+      background: rgba(70, 6, 8, .58) !important;
+      border: 1px solid rgba(255, 211, 107, .28) !important;
+    }
+
+    .step-icon {
+      color: #ffd36b !important;
+      text-shadow: 0 0 10px rgba(255,211,107,.42);
+      font-size: 15px;
+      line-height: 1;
+      display: inline-block;
+      margin-right: 2px;
+    }
+
+    .cta,
+    .webchat-btn,
+    #abrirWebchat,
+    #abrirChatAhora {
+      background: linear-gradient(180deg, #fff0b5 0%, #e5aa32 58%, #9b5d12 100%) !important;
+      color: #1b0707 !important;
+      border: 1px solid rgba(255, 211, 107, .55) !important;
+      box-shadow:
+        0 0 26px rgba(255, 204, 84, .42),
+        inset 0 1px 0 rgba(255,255,255,.38) !important;
+    }
+
+    .cta::before {
+      background: linear-gradient(120deg, transparent 0%, rgba(255, 232, 168, .42) 45%, transparent 62%) !important;
+    }
+
+    .cta .ripple {
+      background: rgba(255, 211, 107, .58) !important;
+    }
+
+    .oasis-box,
+    .webchat-box {
+      background:
+        radial-gradient(circle at center, rgba(255, 190, 60, .13), transparent 34%),
+        linear-gradient(180deg, rgba(34, 4, 5, .98), rgba(9, 2, 2, .98)) !important;
+      border: 1px solid rgba(255, 210, 110, .40) !important;
+      box-shadow: 0 0 42px rgba(255, 191, 64, .18) !important;
+    }
+
+    .oasis-card {
+      background: rgba(70, 6, 8, .52) !important;
+      border: 1px solid rgba(255, 211, 107, .22) !important;
+    }
+
+    .oasis-icon {
+      background: linear-gradient(180deg, #fff0b5 0%, #e5aa32 58%, #9b5d12 100%) !important;
+      color: #1b0707 !important;
+    }
+
+    .close {
+      background: rgba(95, 5, 7, .45) !important;
+      border: 1px solid rgba(255, 211, 107, .40) !important;
+      color: #ffd36b !important;
+    }
+
+    .webchat-helper,
+    .webchat-pointer {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      background: rgba(70, 6, 8, .68) !important;
+      border: 1px solid rgba(255, 211, 107, .35) !important;
+      color: #ffd36b !important;
+    }
+
+    .webchat-glow {
+      background: radial-gradient(circle, rgba(255,211,107,.58) 0%, rgba(130,8,8,.18) 55%, transparent 75%) !important;
+    }
+
+    /* En la interfaz no queda verde, azul, violeta ni blanco puro */
+    .subtitle,
+    .step,
+    .note,
+    .footer,
+    .oasis-text,
+    .webchat-helper {
+      text-shadow: none !important;
+    }
+
+
+    /* =========================================================
+       NUEVA GUÍA WEBCHAT EN LA MISMA PÁGINA
+       Al entrar: globo oculto.
+       Al tocar Abrir Webchat: se oculta la interfaz principal
+       y aparece esta guía señalando el globo abajo a la derecha.
+       ========================================================= */
+
+    body.guia-webchat-activa .page {
+      display: none !important;
+    }
+
+    .webchat-guide-screen {
+      width: 100%;
+      max-width: 430px;
+      display: none;
+      position: relative;
+      z-index: 20;
+    }
+
+    body.guia-webchat-activa .webchat-guide-screen {
+      display: block;
+      animation: guideIn .28s ease-out both;
+    }
+
+    @keyframes guideIn {
+      from { opacity: 0; transform: translateY(12px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .guide-card {
+      position: relative;
+      border: 1px solid rgba(255, 210, 110, 0.46);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top, rgba(255, 211, 107, .10), transparent 34%),
+        linear-gradient(180deg, rgba(38, 4, 5, .97), rgba(9, 2, 2, .985));
+      box-shadow:
+        0 0 42px rgba(255, 191, 64, .16),
+        0 20px 50px rgba(0,0,0,.40),
+        inset 0 0 28px rgba(255, 211, 100, .07);
+      padding: 28px 22px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .guide-card::before {
+      content: "";
+      position: absolute;
+      inset: -40% -20% auto;
+      height: 180px;
+      background: radial-gradient(circle, rgba(255,211,107,.14), transparent 60%);
+      pointer-events: none;
+    }
+
+    .guide-title {
+      font-size: 30px;
+      line-height: 1.05;
+      margin: 14px 0 12px;
+      text-transform: uppercase;
+      color: #ffe8a8;
+      position: relative;
+      z-index: 1;
+    }
+
+    .guide-title span {
+      color: #ffd36b;
+      text-shadow: 0 0 18px rgba(255, 211, 107, 0.5);
+    }
+
+    .guide-subtitle {
+      font-size: 15px;
+      color: #f8e9c9;
+      line-height: 1.45;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .guide-steps {
+      display: grid;
+      gap: 10px;
+      text-align: left;
+      margin: 18px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .guide-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(70, 6, 8, .58);
+      border: 1px solid rgba(255, 211, 107, .28);
+      border-radius: 15px;
+      padding: 12px;
+      color: #fff7e7;
+      font-size: 14px;
+    }
+
+    .guide-step-number {
+      width: 26px;
+      height: 26px;
+      min-width: 26px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 900;
+      color: #1b0707;
+      background: linear-gradient(180deg, #fff0b5 0%, #e5aa32 58%, #9b5d12 100%);
+      box-shadow: 0 0 14px rgba(255, 204, 84, 0.28);
+    }
+
+    .guide-mini-note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(255,255,255,.62);
+      line-height: 1.35;
+    }
+
+    .guide-pointer-fixed {
+      display: none;
+      position: fixed;
+      right: 84px;
+      bottom: 112px;
+      z-index: 10003;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      pointer-events: none;
+    }
+
+    body.guia-webchat-activa .guide-pointer-fixed {
+      display: flex;
+    }
+
+    .guide-pointer-label {
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,211,107,.46);
+      background: rgba(0,0,0,.82);
+      color: #ffd36b;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .3px;
+      box-shadow: 0 0 18px rgba(255,211,107,.16);
+      white-space: nowrap;
+    }
+
+    .guide-pointer-arrow {
+      font-size: 46px;
+      line-height: 1;
+      color: #ffd36b;
+      text-shadow: 0 0 18px rgba(255,211,107,.75);
+      animation: arrowToChat .8s infinite alternate;
+    }
+
+    .webchat-target-ring {
+      display: none;
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 3px solid rgba(255,211,107,.92);
+      box-shadow: 0 0 0 6px rgba(255,211,107,.12), 0 0 26px rgba(255,211,107,.34);
+      z-index: 10002;
+      pointer-events: none;
+      animation: ringPulse 1.1s ease-in-out infinite;
+    }
+
+    body.guia-webchat-activa .webchat-glow {
+      display: block !important;
+      z-index: 10001;
+    }
+
+    body.guia-webchat-activa .webchat-target-ring {
+      display: block;
+    }
+
+    @keyframes arrowToChat {
+      from { transform: translate(0, 0); }
+      to { transform: translate(6px, 6px); }
+    }
+
+    @keyframes ringPulse {
+      0% { transform: scale(.92); opacity: .85; }
+      100% { transform: scale(1.05); opacity: 1; }
+    }
+
+    @media(max-width:720px){
+      .guide-pointer-fixed {
+        right: 74px;
+        bottom: 102px;
+      }
+
+      .guide-pointer-label {
+        font-size: 11px;
+        padding: 7px 9px;
+      }
+
+      .guide-pointer-arrow {
+        font-size: 40px;
+      }
+
+      .webchat-target-ring {
+        right: 12px;
+        bottom: 12px;
+        width: 68px;
+        height: 68px;
+      }
+    }
+
+    /* =========================================================
+       OVERRIDE FINAL FORMATO LUCK
+       Rojo casino + dorado cálido estilo Las Vegas moderno.
+       Además oculta la burbuja grande de Callbell hasta tocar ABRIR WEBCHAT.
+       ========================================================= */
+
+    body {
+      background:
+        radial-gradient(circle at 50% 22%, rgba(255, 211, 107, .18), transparent 32%),
+        radial-gradient(circle at 20% 80%, rgba(255, 175, 40, .10), transparent 38%),
+        linear-gradient(160deg, #070101 0%, #250303 42%, #5a0707 100%) !important;
+    }
+
+    .wins-red-branding {
+      background:
+        radial-gradient(circle at 50% 42%, rgba(255, 211, 107, .20), transparent 36%),
+        linear-gradient(135deg, rgba(16,0,0,.88), rgba(130,4,4,.62) 48%, rgba(8,0,0,.90)) !important;
+      opacity: .94 !important;
+    }
+
+    .card,
+    .guide-card,
+    .oasis-box {
+      border-color: rgba(255, 194, 63, .48) !important;
+      background:
+        radial-gradient(circle at top, rgba(255, 211, 107, .12), transparent 34%),
+        linear-gradient(180deg, rgba(48, 5, 5, .97), rgba(9, 2, 2, .985)) !important;
+      box-shadow:
+        0 0 42px rgba(255, 191, 64, .18),
+        0 20px 50px rgba(0,0,0,.42),
+        inset 0 0 30px rgba(255, 211, 100, .07) !important;
+    }
+
+    .brand .wins {
+      color: #d31212 !important;
+      text-shadow:
+        0 2px 0 #ffcf5a,
+        0 0 16px rgba(255, 201, 72, .75),
+        0 0 34px rgba(211, 18, 18, .72) !important;
+    }
+
+    .brand .crupiers,
+    h1 span,
+    .amount,
+    .amount-label,
+    .badge,
+    .step b,
+    .oasis-title span,
+    .oasis-label,
+    .guide-title span {
+      color: #ffd36b !important;
+    }
+
+    .badge {
+      background: rgba(95, 5, 7, .50) !important;
+      border: 1px solid rgba(255, 211, 107, .45) !important;
+      box-shadow: 0 0 16px rgba(255, 177, 38, .12) !important;
+    }
+
+    .amount-box {
+      background:
+        radial-gradient(circle at center, rgba(255, 211, 107, .10), transparent 58%),
+        linear-gradient(180deg, rgba(145, 7, 7, .58), rgba(31, 4, 4, .86)) !important;
+      border: 1px solid rgba(255, 211, 107, .36) !important;
+    }
+
+    .step,
+    .guide-step,
+    .oasis-card {
+      background: rgba(76, 6, 6, .58) !important;
+      border: 1px solid rgba(255, 211, 107, .26) !important;
+    }
+
+    .cta,
+    .webchat-btn,
+    #abrirWebchat,
+    #abrirChatAhora,
+    .oasis-icon,
+    .guide-step-number {
+      background: linear-gradient(180deg, #fff3bd 0%, #f1ba3d 55%, #b46a10 100%) !important;
+      color: #1b0707 !important;
+      border: 1px solid rgba(255, 211, 107, .55) !important;
+      box-shadow:
+        0 0 26px rgba(255, 204, 84, .42),
+        inset 0 1px 0 rgba(255,255,255,.38) !important;
+    }
+
+    .webchat-glow,
+    body.guia-webchat-activa .webchat-glow {
+      background: radial-gradient(circle, rgba(255,211,107,.62) 0%, rgba(150,8,8,.20) 55%, transparent 75%) !important;
+    }
+
+    [id*="callbell"],
+    [class*="callbell"],
+    [id*="Callbell"],
+    [class*="Callbell"],
+    iframe[src*="callbell"],
+    iframe[src*="livechat"],
+    div[style*="z-index: 2147483647"],
+    div[style*="z-index:2147483647"] {
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: opacity .2s ease !important;
+    }
+
+    body.webchat-visible [id*="callbell"],
+    body.webchat-visible [class*="callbell"],
+    body.webchat-visible [id*="Callbell"],
+    body.webchat-visible [class*="Callbell"],
+    body.webchat-visible iframe[src*="callbell"],
+    body.webchat-visible iframe[src*="livechat"],
+    body.webchat-visible div[style*="z-index: 2147483647"],
+    body.webchat-visible div[style*="z-index:2147483647"] {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
   </style>
 </head>
 
 <body>
+  <div class="video-loading-fallback"></div>
 
-<div class="bg-lights">
-  <span></span><span></span><span></span><span></span><span></span>
-  <span></span><span></span><span></span><span></span><span></span>
-</div>
-
-<div class="card">
-
-  <div class="logo">
-    <div class="logo-main">LUCK</div>
-    <div class="logo-sub">Crupiers</div>
+  <div class="cinema-video-bg" aria-hidden="true">
+    <video id="bgVideo" autoplay muted loop playsinline preload="auto" class="active">
+      <source src="video2.mp4" type="video/mp4">
+    </video>
   </div>
 
-  <div class="badge">
-    LÍNEAS DE ATENCIÓN LUCK
-  </div>
-
-  <h1>
-    ¿Perdiste nuestro <span>contacto?</span>
-  </h1>
-
-  <div class="highlight-box">
-    <div class="highlight-small">
-      Elegí una línea disponible
+  <div class="wins-red-branding"></div>
+  <div class="cinema-color-grade"></div>
+  <div class="cinema-vignette"></div>
+  <div class="cinema-grain"></div>
+  <div class="casino-cinema-assets">
+    <div class="cinema-dust">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
     </div>
 
-    <div class="highlight-main">
-      LUCK
+    <div class="casino-fx">
+      <span class="fall-chip chip-red chip-20">
+        <span class="chip-face front"><span class="chip-symbol">♠</span></span>
+        <span class="chip-face back"><span class="chip-symbol">♠</span></span>
+      </span>
+
+      <span class="fall-card card-heart"></span>
+
+      <span class="fall-chip chip-black chip-50">
+        <span class="chip-face front"><span class="chip-symbol">♠</span></span>
+        <span class="chip-face back"><span class="chip-symbol">♠</span></span>
+      </span>
+
+      <span class="fall-card card-spade"></span>
+
+      <span class="fall-dice"></span>
+
+      <span class="fall-card card-diamond"></span>
+
+      <span class="fall-chip chip-red chip-100">
+        <span class="chip-face front"><span class="chip-symbol">♠</span></span>
+        <span class="chip-face back"><span class="chip-symbol">♠</span></span>
+      </span>
+
+      <span class="fall-card card-club"></span>
+
+      <span class="fall-chip chip-black chip-25">
+        <span class="chip-face front"><span class="chip-symbol">♠</span></span>
+        <span class="chip-face back"><span class="chip-symbol">♠</span></span>
+      </span>
     </div>
   </div>
 
-  <p class="subtitle">
-    Si perdiste nuestro número, tocá una línea disponible y volvé a escribirnos por WhatsApp.
-  </p>
+  <main class="page">
+    <div class="glow"></div>
 
-  <div class="steps">
-    <div class="step">◆ Recuperá una <b>línea de atención</b></div>
-    <div class="step">◆ Escribinos por <b>WhatsApp o Webchat</b></div>
-    <div class="step">◆ Guardá el contacto para la próxima</div>
-  </div>
-
-  <button class="btn" id="abrirLineas">
-    Ver líneas de WhatsApp
-  </button>
-
-  <button class="btn" id="abrirWebchat">
-    Abrir Webchat
-  </button>
-
-  <div class="footer">
-    LUCK CRUPIERS · Atención activa
-  </div>
-
-</div>
-
-<div class="overlay" id="overlay">
-
-  <div class="overlay-box">
-
-    <button class="close" id="cerrar">
-      ×
-    </button>
-
-    <h2 class="overlay-title">
-      Tus líneas <span>LUCK</span>
-    </h2>
-
-    <p class="overlay-sub">
-      Elegí cualquier línea disponible para volver a comunicarte.
-    </p>
-
-    <div class="grid" id="grid"></div>
-
-  </div>
-
-</div>
-
-<script>
-
-const TODOS_LOS_NUMEROS = [
-  "5491161826510",
-  "5491138883248",
-  "5491141408183",
-  "5491144948645",
-  "5491139342774",
-  "5491128365149",
-  "5491139238015",
-  "5491161684917",
-  "5491151626513",
-  "5491138421945",
-  "5491170058162",
-  "595991244609",
-  "595993099630",
-  "595972267969",
-  "595995390340",
-  "595991788909",
-  "595992044932",
-  "595991505871",
-  "595993479603",
-  "595992752508",
-  "595993061021",
-  "595993059464",
-  "595993511841",
-  "595992577913",
-  "595994148899",
-  "595993511853",
-  "595993433580",
-  "5491139038269"
-];
-
-const MAX_LINEAS = 6;
-
-const grid = document.getElementById("grid");
-
-function mezclar(array){
-  return [...array].sort(() => Math.random() - 0.5);
-}
-
-function formatearNumero(num){
-
-  if(num.startsWith("54")){
-    return "+" +
-      num.slice(0,2) + " " +
-      num.slice(2,4) + " " +
-      num.slice(4,8) + " " +
-      num.slice(8);
-  }
-
-  if(num.startsWith("595")){
-    return "+" +
-      num.slice(0,3) + " " +
-      num.slice(3,6) + " " +
-      num.slice(6);
-  }
-
-  return "+" + num;
-}
-
-function cargarLineas(){
-
-  grid.innerHTML = "";
-
-  const seleccion = mezclar(TODOS_LOS_NUMEROS).slice(0, MAX_LINEAS);
-
-  seleccion.forEach((num,i)=>{
-
-    const card = document.createElement("a");
-
-    card.className = "line-card";
-
-    card.href =
-      `https://wa.me/${num}?text=${encodeURIComponent("Hola LUCK, perdí el contacto y quiero volver a comunicarme")}`;
-
-    card.target = "_blank";
-
-    card.innerHTML = `
-      <div class="line-icon">☎</div>
-
-      <div>
-        <div class="line-label">
-          LÍNEA LUCK ${i + 1}
-        </div>
-
-        <div class="line-number">
-          ${formatearNumero(num)}
-        </div>
+    <section class="card">
+      <div class="brand">
+        <div class="wins">LUCK</div>
+        <div class="crupiers">Crupiers</div>
       </div>
-    `;
 
-    grid.appendChild(card);
+      <div class="badge">LÍNEAS DE ATENCIÓN LUCK</div>
 
-  });
+      <h1>¿Perdiste nuestro <span>contacto?</span></h1>
 
-}
+      <div class="amount-box">
+        <div class="amount-label">Elegí una línea disponible</div>
+        <div class="amount">LUCK</div>
+      </div>
 
-document.getElementById("abrirLineas")
-.addEventListener("click",()=>{
+      <p class="subtitle">
+        Si perdiste nuestro número, tocá una línea disponible y volvé a escribirnos por WhatsApp.
+      </p>
 
-  cargarLineas();
+      <div class="steps">
+        <div class="step"><span class="step-icon">◆</span><span>Recuperá una <b>línea de atención</b></span></div>
+        <div class="step"><span class="step-icon">◆</span><span>Escribinos por <b>WhatsApp o Webchat</b></span></div>
+        <div class="step"><span class="step-icon">◆</span><span>Guardá el contacto para la próxima</span></div>
+      </div>
 
-  document.getElementById("overlay")
-  .classList.add("active");
+      <button class="cta" id="abrirOasis">Ver líneas de WhatsApp</button>
 
-});
+      <button class="cta webchat-btn" id="abrirWebchat">Abrir Webchat</button>
 
-document.getElementById("cerrar")
-.addEventListener("click",()=>{
+      <div class="webchat-helper" id="webchatHelper">👉 Desde aquí nos podés escribir en el webchat.</div>
 
-  document.getElementById("overlay")
-  .classList.remove("active");
+      <div class="webchat-pointer" id="webchatPointer">
+        <div class="pointer-arrow">➜</div>
+        <div class="pointer-text">PERFECTO, ESCRIBANOS AQUÍ</div>
+      </div>
 
-});
+      <p class="note">
+        Usá estas líneas si perdiste nuestro contacto o necesitás volver a comunicarte.
+      </p>
+    </section>
 
-document.getElementById("overlay")
-.addEventListener("click",(e)=>{
+    <div class="footer">LUCK CRUPIERS · Atención activa</div>
+  </main>
 
-  if(e.target.id === "overlay"){
 
-    document.getElementById("overlay")
-    .classList.remove("active");
+  <section class="webchat-guide-screen" id="webchatGuideScreen">
+    <div class="guide-card">
+      <div class="brand">
+        <div class="wins">LUCK</div>
+        <div class="crupiers">Crupiers</div>
+      </div>
 
-  }
+      <div class="badge">WEBCHAT DE ATENCIÓN</div>
 
-});
+      <h2 class="guide-title">Perfecto, <span>escribinos aquí</span></h2>
 
-document.getElementById("abrirWebchat")
-.addEventListener("click",()=>{
+      <p class="guide-subtitle">
+        El globo del webchat ya está habilitado. Mirá abajo a la derecha: lo dejamos marcado para que entres directo.
+      </p>
 
-  document.body.classList.add("webchat-visible");
+      <div class="guide-steps">
+        <div class="guide-step"><div class="guide-step-number">1</div><div>Buscá el <b>globo marcado</b> abajo a la derecha.</div></div>
+        <div class="guide-step"><div class="guide-step-number">2</div><div>Tocá ese globo para abrir el <b>webchat</b>.</div></div>
+        <div class="guide-step"><div class="guide-step-number">3</div><div>Escribinos y te respondemos desde atención LUCK.</div></div>
+      </div>
 
-  setTimeout(()=>{
+      <p class="guide-mini-note">Tocá directamente el globo señalado abajo a la derecha.</p>
+    </div>
+  </section>
 
-    const launcher =
-      document.querySelector(
-        '[id*="callbell"], [class*="callbell"], iframe[src*="callbell"], iframe[src*="livechat"]'
-      );
+  <div class="guide-pointer-fixed" id="guidePointerFixed">
+    <div class="guide-pointer-label">TOCÁ ESTE GLOBO</div>
+    <div class="guide-pointer-arrow">↘</div>
+  </div>
 
-    if(launcher){
-      launcher.click();
+  <div class="webchat-target-ring" aria-hidden="true"></div>
+
+  <div class="oasis-overlay" id="oasis">
+    <div class="oasis-box">
+      <button class="close" id="cerrar">×</button>
+
+      <h2 class="oasis-title">Tu <span>línea LUCK</span> de Atención</h2>
+      <p class="oasis-text">Elegí una línea disponible. Si una no responde, probá con otra opción.</p>
+
+      <div class="oasis-grid" id="grid"></div>
+    </div>
+  </div>
+
+
+
+  <div class="webchat-glow" id="webchatGlow"></div>
+
+  <script>
+
+
+
+    const TODOS_LOS_NUMEROS = [
+      "5491161826510",
+      "5491138883248",
+      "5491141408183",
+      "5491144948645",
+      "5491139342774",
+      "5491128365149",
+      "5491139238015",
+      "5491161684917",
+      "5491151626513",
+      "5491138421945",
+      "5491170058162",
+      "595991244609",
+      "595993099630",
+      "595972267969",
+      "595995390340",
+      "595991788909",
+      "595992044932",
+      "595991505871",
+      "595993479603",
+      "595992752508",
+      "595993061021",
+      "595993059464",
+      "595993511841",
+      "595992577913",
+      "595994148899",
+      "595993511853",
+      "595993433580",
+      "5491139038269"
+    ];
+
+    const MAX_LINEAS = 6;
+    const grid = document.getElementById("grid");
+
+    function mezclar(array) {
+      return [...array].sort(() => Math.random() - 0.5);
     }
 
-  },400);
+    function formatearNumero(num) {
+      if (num.startsWith("54")) {
+        return "+" + num.slice(0, 2) + " " + num.slice(2, 4) + " " + num.slice(4, 8) + " " + num.slice(8);
+      }
 
-});
+      if (num.startsWith("595")) {
+        return "+" + num.slice(0, 3) + " " + num.slice(3, 6) + " " + num.slice(6);
+      }
 
-</script>
+      return "+" + num;
+    }
 
-<!-- Start of Async Callbell Code -->
-<script>
-  if (!window.callbellSettings) {
-    window.callbellSettings = {}
-  }
+    function cargarNumerosOasis() {
+      grid.innerHTML = "";
 
-  window.callbellSettings["uuid"] = "f617dac5-a38e-4ecb-a032-38bcffea5881";
-  window.callbellSettings["script_token"] = "JJKcLbQFCd4mrJUzhga6tgVP";
-</script>
+      const seleccion = mezclar(TODOS_LOS_NUMEROS).slice(0, MAX_LINEAS);
 
-<script>
-  (function(){
+      seleccion.forEach((num, i) => {
+        const visible = formatearNumero(num);
 
-    var w = window;
-    var d = document;
+        const a = document.createElement("a");
+        a.className = "oasis-card";
+        a.href = `https://wa.me/${num}?text=${encodeURIComponent("Hola LUCK, perdí el contacto y quiero volver a comunicarme")}`;
+        a.target = "_blank";
+        a.rel = "noopener";
 
-    var l = function(){
+        a.innerHTML = `
+          <div class="oasis-icon">☎</div>
+          <div>
+            <div class="oasis-label">LÍNEA LUCK ${i + 1}</div>
+            <div class="oasis-number">${visible}</div>
+          </div>
+        `;
 
-      var s = d.createElement('script');
+        grid.appendChild(a);
+      });
+    }
 
-      s.async = true;
+    document.getElementById("abrirOasis").addEventListener("click", function () {
+      cargarNumerosOasis();
+      document.getElementById("oasis").classList.add("active");
+    });
 
-      s.src =
-        'https://dash.callbell.eu/include/livechat/' +
-        window.callbellSettings.script_token +
-        '/' +
-        window.callbellSettings.uuid +
-        '.js';
+    document.getElementById("cerrar").addEventListener("click", function () {
+      document.getElementById("oasis").classList.remove("active");
+    });
 
-      var x = d.getElementsByTagName('script')[0];
+    document.getElementById("oasis").addEventListener("click", function (e) {
+      if (e.target.id === "oasis") {
+        document.getElementById("oasis").classList.remove("active");
+      }
+    });
 
-      x.parentNode.insertBefore(s, x);
+    const botonWebchat = document.getElementById("abrirWebchat");
 
-    };
+    function mostrarGuiaWebchat() {
+      document.body.classList.add("webchat-visible");
+      document.body.classList.add("guia-webchat-activa");
+    }
 
-    w.addEventListener('load', l, false);
+    function buscarLauncherCallbell() {
+      return document.querySelector(
+        '[id*="callbell"], [class*="callbell"], iframe[src*="callbell"], iframe[src*="livechat"]'
+      );
+    }
 
-  })();
-</script>
-<!-- End of Async Callbell Code -->
+    function abrirChatCallbell() {
+      const comandos = ["open_chat", "openChat", "show", "open"];
+      const apis = [window.Callbell, window.callbell];
 
+      for (const api of apis) {
+        if (typeof api !== "function") continue;
+
+        for (const cmd of comandos) {
+          try {
+            api(cmd);
+            return true;
+          } catch (e) {}
+        }
+      }
+
+      const launcher = buscarLauncherCallbell();
+      if (launcher) {
+        launcher.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true, view: window }));
+        return true;
+      }
+
+      return false;
+    }
+
+    botonWebchat.addEventListener("click", function () {
+      mostrarGuiaWebchat();
+
+      setTimeout(function () {
+        abrirChatCallbell();
+      }, 350);
+    });
+
+
+  </script>
+
+
+
+  <script>
+    const bgVideo = document.getElementById("bgVideo");
+
+    if (bgVideo) {
+      bgVideo.muted = true;
+      bgVideo.loop = true;
+      bgVideo.playsInline = true;
+
+      bgVideo.play().catch(function () {
+        document.body.addEventListener("click", function () {
+          bgVideo.play();
+        }, { once: true });
+      });
+    }
+  </script>
+
+
+  <script>
+    document.querySelectorAll(".cta").forEach(function (btn) {
+      btn.addEventListener("pointerdown", function (e) {
+        btn.classList.add("is-pressing");
+
+        const rect = btn.getBoundingClientRect();
+        const ripple = document.createElement("span");
+        ripple.className = "ripple";
+        ripple.style.left = (e.clientX - rect.left) + "px";
+        ripple.style.top = (e.clientY - rect.top) + "px";
+
+        btn.appendChild(ripple);
+
+        setTimeout(function () {
+          ripple.remove();
+        }, 650);
+      });
+
+      ["pointerup", "pointerleave", "pointercancel"].forEach(function (eventName) {
+        btn.addEventListener(eventName, function () {
+          btn.classList.remove("is-pressing");
+        });
+      });
+    });
+  </script>
+  <script>
+    if (!window.callbellSettings) {
+      window.callbellSettings = {};
+    }
+    window.callbellSettings["uuid"] = "f617dac5-a38e-4ecb-a032-38bcffea5881";
+    window.callbellSettings["script_token"] = "JJKcLbQFCd4mrJUzhga6tgVP";
+  </script>
+  <script>
+    (function(){
+      var w = window;
+      var d = document;
+      var l = function(){
+        var s = d.createElement("script");
+        s.async = true;
+        s.src = "https://dash.callbell.eu/include/livechat/" + window.callbellSettings.script_token + "/" + window.callbellSettings.uuid + ".js";
+        var x = d.getElementsByTagName("script")[0];
+        x.parentNode.insertBefore(s, x);
+      };
+      w.addEventListener("load", l, false);
+    })();
+  </script>
 </body>
 </html>
