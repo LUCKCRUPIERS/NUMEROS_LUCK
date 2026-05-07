@@ -3,11 +3,600 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>LUCK CRUPIERS | Contacto de Atención</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:
+        radial-gradient(circle at top, rgba(255,210,90,.12), transparent 35%),
+        linear-gradient(160deg,#120202 0%,#2a0505 45%,#4d0a0a 100%);
+      color:white;
+    }
+
+    .bg-lights{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:-1;
+    }
+
+    .bg-lights span{
+      position:absolute;
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#ffd36b;
+      box-shadow:
+        0 0 10px #ffd36b,
+        0 0 20px #ffd36b,
+        0 0 40px #ff9b00;
+      animation:float 8s linear infinite;
+      opacity:.7;
+    }
+
+    .bg-lights span:nth-child(1){left:5%;animation-delay:0s;}
+    .bg-lights span:nth-child(2){left:15%;animation-delay:1s;}
+    .bg-lights span:nth-child(3){left:25%;animation-delay:2s;}
+    .bg-lights span:nth-child(4){left:35%;animation-delay:3s;}
+    .bg-lights span:nth-child(5){left:45%;animation-delay:4s;}
+    .bg-lights span:nth-child(6){left:55%;animation-delay:5s;}
+    .bg-lights span:nth-child(7){left:65%;animation-delay:2s;}
+    .bg-lights span:nth-child(8){left:75%;animation-delay:4s;}
+    .bg-lights span:nth-child(9){left:85%;animation-delay:1s;}
+    .bg-lights span:nth-child(10){left:95%;animation-delay:3s;}
+
+    @keyframes float{
+      from{
+        transform:translateY(100vh) scale(.6);
+        opacity:0;
+      }
+      15%{
+        opacity:.8;
+      }
+      to{
+        transform:translateY(-120vh) scale(1.2);
+        opacity:0;
+      }
+    }
+
+    .card{
+      width:100%;
+      max-width:430px;
+      border-radius:28px;
+      overflow:hidden;
+      position:relative;
+      border:1px solid rgba(255,215,120,.28);
+      background:
+        radial-gradient(circle at top, rgba(255,215,120,.08), transparent 35%),
+        linear-gradient(180deg, rgba(30,4,4,.96), rgba(10,3,3,.98));
+      box-shadow:
+        0 0 40px rgba(255,190,70,.12),
+        0 25px 60px rgba(0,0,0,.45);
+      padding:30px 22px;
+      text-align:center;
+    }
+
+    .logo{
+      margin-bottom:18px;
+    }
+
+    .logo-main{
+      font-size:48px;
+      font-weight:900;
+      letter-spacing:2px;
+      color:#b50f10;
+      text-shadow:
+        0 0 10px rgba(255,210,100,.4),
+        0 0 24px rgba(255,190,70,.3);
+    }
+
+    .logo-sub{
+      color:#ffd36b;
+      font-style:italic;
+      margin-top:-6px;
+      font-size:22px;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:9px 15px;
+      border-radius:999px;
+      background:rgba(255,210,100,.08);
+      border:1px solid rgba(255,210,100,.25);
+      color:#ffd36b;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.6px;
+      margin-bottom:18px;
+    }
+
+    h1{
+      font-size:31px;
+      line-height:1.08;
+      margin-bottom:18px;
+      text-transform:uppercase;
+    }
+
+    h1 span{
+      color:#ffd36b;
+    }
+
+    .highlight-box{
+      border-radius:22px;
+      padding:18px;
+      margin-bottom:20px;
+      background:
+        linear-gradient(180deg, rgba(120,8,8,.55), rgba(30,4,4,.8));
+      border:1px solid rgba(255,210,100,.22);
+    }
+
+    .highlight-small{
+      color:#ffe7ae;
+      font-size:13px;
+      margin-bottom:6px;
+      text-transform:uppercase;
+    }
+
+    .highlight-main{
+      font-size:44px;
+      font-weight:900;
+      color:#ffd36b;
+      text-shadow:0 0 18px rgba(255,210,100,.4);
+    }
+
+    .subtitle{
+      color:#ffe9c0;
+      line-height:1.5;
+      font-size:15px;
+      margin-bottom:22px;
+    }
+
+    .steps{
+      display:grid;
+      gap:10px;
+      margin-bottom:22px;
+      text-align:left;
+    }
+
+    .step{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,210,100,.12);
+      border-radius:15px;
+      padding:13px;
+      color:#fff3d6;
+      font-size:14px;
+    }
+
+    .step b{
+      color:#ffd36b;
+    }
+
+    .btn{
+      width:100%;
+      border:none;
+      cursor:pointer;
+      border-radius:18px;
+      padding:16px;
+      font-size:16px;
+      font-weight:900;
+      text-transform:uppercase;
+      margin-top:10px;
+      transition:.2s;
+      background:
+        linear-gradient(180deg,#fff0b5 0%,#e5aa32 58%,#9b5d12 100%);
+      color:#1b0707;
+      box-shadow:0 0 22px rgba(255,200,80,.28);
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .footer{
+      margin-top:16px;
+      color:rgba(255,255,255,.45);
+      font-size:12px;
+    }
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.84);
+      backdrop-filter:blur(8px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:9999;
+    }
+
+    .overlay.active{
+      display:flex;
+    }
+
+    .overlay-box{
+      width:min(920px,100%);
+      max-height:92vh;
+      overflow:auto;
+      border-radius:28px;
+      padding:32px 24px;
+      background:
+        radial-gradient(circle at top, rgba(255,215,100,.1), transparent 30%),
+        linear-gradient(180deg, rgba(25,4,4,.98), rgba(10,3,3,.98));
+      border:1px solid rgba(255,210,100,.22);
+    }
+
+    .overlay-title{
+      text-align:center;
+      font-size:34px;
+      margin-bottom:10px;
+      text-transform:uppercase;
+    }
+
+    .overlay-title span{
+      color:#ffd36b;
+    }
+
+    .overlay-sub{
+      text-align:center;
+      color:#ffe7ba;
+      margin-bottom:22px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+    }
+
+    .line-card{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      text-decoration:none;
+      border-radius:18px;
+      padding:14px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,210,100,.12);
+      transition:.2s;
+    }
+
+    .line-card:hover{
+      transform:scale(1.02);
+      border-color:rgba(255,210,100,.3);
+    }
+
+    .line-icon{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      font-size:18px;
+      font-weight:900;
+      background:
+        linear-gradient(180deg,#fff0b5 0%,#e5aa32 58%,#9b5d12 100%);
+      color:#1b0707;
+    }
+
+    .line-label{
+      color:#ffd36b;
+      font-size:11px;
+      font-weight:900;
+      letter-spacing:.6px;
+    }
+
+    .line-number{
+      color:white;
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .close{
+      position:absolute;
+      top:18px;
+      right:18px;
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      border:none;
+      cursor:pointer;
+      font-size:22px;
+      background:rgba(255,255,255,.08);
+      color:#ffd36b;
+    }
+
+    @media(max-width:700px){
+      .grid{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
 </head>
-<body style="background:#120202;color:white;font-family:Arial;padding:40px;">
-<h1>LUCK CRUPIERS</h1>
-<p>Archivo HTML generado correctamente.</p>
-<p>Usá el código completo enviado en el chat para reemplazar este contenido si querés la versión visual completa.</p>
+
+<body>
+
+<div class="bg-lights">
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<div class="card">
+
+  <div class="logo">
+    <div class="logo-main">LUCK</div>
+    <div class="logo-sub">Crupiers</div>
+  </div>
+
+  <div class="badge">
+    LÍNEAS DE ATENCIÓN LUCK
+  </div>
+
+  <h1>
+    ¿Perdiste nuestro <span>contacto?</span>
+  </h1>
+
+  <div class="highlight-box">
+    <div class="highlight-small">
+      Elegí una línea disponible
+    </div>
+
+    <div class="highlight-main">
+      LUCK
+    </div>
+  </div>
+
+  <p class="subtitle">
+    Si perdiste nuestro número, tocá una línea disponible y volvé a escribirnos por WhatsApp.
+  </p>
+
+  <div class="steps">
+    <div class="step">◆ Recuperá una <b>línea de atención</b></div>
+    <div class="step">◆ Escribinos por <b>WhatsApp o Webchat</b></div>
+    <div class="step">◆ Guardá el contacto para la próxima</div>
+  </div>
+
+  <button class="btn" id="abrirLineas">
+    Ver líneas de WhatsApp
+  </button>
+
+  <button class="btn" id="abrirWebchat">
+    Abrir Webchat
+  </button>
+
+  <div class="footer">
+    LUCK CRUPIERS · Atención activa
+  </div>
+
+</div>
+
+<div class="overlay" id="overlay">
+
+  <div class="overlay-box">
+
+    <button class="close" id="cerrar">
+      ×
+    </button>
+
+    <h2 class="overlay-title">
+      Tus líneas <span>LUCK</span>
+    </h2>
+
+    <p class="overlay-sub">
+      Elegí cualquier línea disponible para volver a comunicarte.
+    </p>
+
+    <div class="grid" id="grid"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+const TODOS_LOS_NUMEROS = [
+  "5491161826510",
+  "5491138883248",
+  "5491141408183",
+  "5491144948645",
+  "5491139342774",
+  "5491128365149",
+  "5491139238015",
+  "5491161684917",
+  "5491151626513",
+  "5491138421945",
+  "5491170058162",
+  "595991244609",
+  "595993099630",
+  "595972267969",
+  "595995390340",
+  "595991788909",
+  "595992044932",
+  "595991505871",
+  "595993479603",
+  "595992752508",
+  "595993061021",
+  "595993059464",
+  "595993511841",
+  "595992577913",
+  "595994148899",
+  "595993511853",
+  "595993433580",
+  "5491139038269"
+];
+
+const MAX_LINEAS = 6;
+
+const grid = document.getElementById("grid");
+
+function mezclar(array){
+  return [...array].sort(() => Math.random() - 0.5);
+}
+
+function formatearNumero(num){
+
+  if(num.startsWith("54")){
+    return "+" +
+      num.slice(0,2) + " " +
+      num.slice(2,4) + " " +
+      num.slice(4,8) + " " +
+      num.slice(8);
+  }
+
+  if(num.startsWith("595")){
+    return "+" +
+      num.slice(0,3) + " " +
+      num.slice(3,6) + " " +
+      num.slice(6);
+  }
+
+  return "+" + num;
+}
+
+function cargarLineas(){
+
+  grid.innerHTML = "";
+
+  const seleccion = mezclar(TODOS_LOS_NUMEROS).slice(0, MAX_LINEAS);
+
+  seleccion.forEach((num,i)=>{
+
+    const card = document.createElement("a");
+
+    card.className = "line-card";
+
+    card.href =
+      `https://wa.me/${num}?text=${encodeURIComponent("Hola LUCK, perdí el contacto y quiero volver a comunicarme")}`;
+
+    card.target = "_blank";
+
+    card.innerHTML = `
+      <div class="line-icon">☎</div>
+
+      <div>
+        <div class="line-label">
+          LÍNEA LUCK ${i + 1}
+        </div>
+
+        <div class="line-number">
+          ${formatearNumero(num)}
+        </div>
+      </div>
+    `;
+
+    grid.appendChild(card);
+
+  });
+
+}
+
+document.getElementById("abrirLineas")
+.addEventListener("click",()=>{
+
+  cargarLineas();
+
+  document.getElementById("overlay")
+  .classList.add("active");
+
+});
+
+document.getElementById("cerrar")
+.addEventListener("click",()=>{
+
+  document.getElementById("overlay")
+  .classList.remove("active");
+
+});
+
+document.getElementById("overlay")
+.addEventListener("click",(e)=>{
+
+  if(e.target.id === "overlay"){
+
+    document.getElementById("overlay")
+    .classList.remove("active");
+
+  }
+
+});
+
+document.getElementById("abrirWebchat")
+.addEventListener("click",()=>{
+
+  document.body.classList.add("webchat-visible");
+
+  setTimeout(()=>{
+
+    const launcher =
+      document.querySelector(
+        '[id*="callbell"], [class*="callbell"], iframe[src*="callbell"], iframe[src*="livechat"]'
+      );
+
+    if(launcher){
+      launcher.click();
+    }
+
+  },400);
+
+});
+
+</script>
+
+<!-- Start of Async Callbell Code -->
+<script>
+  if (!window.callbellSettings) {
+    window.callbellSettings = {}
+  }
+
+  window.callbellSettings["uuid"] = "f617dac5-a38e-4ecb-a032-38bcffea5881";
+  window.callbellSettings["script_token"] = "JJKcLbQFCd4mrJUzhga6tgVP";
+</script>
+
+<script>
+  (function(){
+
+    var w = window;
+    var d = document;
+
+    var l = function(){
+
+      var s = d.createElement('script');
+
+      s.async = true;
+
+      s.src =
+        'https://dash.callbell.eu/include/livechat/' +
+        window.callbellSettings.script_token +
+        '/' +
+        window.callbellSettings.uuid +
+        '.js';
+
+      var x = d.getElementsByTagName('script')[0];
+
+      x.parentNode.insertBefore(s, x);
+
+    };
+
+    w.addEventListener('load', l, false);
+
+  })();
+</script>
+<!-- End of Async Callbell Code -->
+
 </body>
 </html>
