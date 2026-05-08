@@ -14,15 +14,19 @@
   font-family:Arial, Helvetica, sans-serif;
 }
 
+/* =========================================================
+   APARIENCIA FULL LUCK
+   ========================================================= */
+
 body{
   min-height:100vh;
 
   background:
     radial-gradient(circle at 50% 18%, rgba(255,210,80,.24), transparent 30%),
     radial-gradient(circle at 50% 78%, rgba(180,12,12,.38), transparent 45%),
-    linear-gradient(160deg,#050000 0%,#220202 38%,#750909 100%);
+    linear-gradient(160deg,#050000 0%,#220202 38%,#750909 100%) !important;
 
-  color:#fff4d0;
+  color:#fff4d0 !important;
 
   display:flex;
   align-items:center;
@@ -32,10 +36,6 @@ body{
   position:relative;
   isolation:isolate;
 }
-
-/* =========================
-   VIDEO
-========================= */
 
 .cinema-video-bg{
   position:fixed;
@@ -52,20 +52,25 @@ body{
   width:100%;
   height:100%;
   object-fit:cover;
-  opacity:.24;
+  opacity:0;
+  transform:scale(1.045);
 
   filter:
-    brightness(.45)
-    contrast(1.25)
-    saturate(1.7)
-    hue-rotate(-18deg);
+    brightness(.48)
+    contrast(1.22)
+    saturate(1.55)
+    sepia(.22)
+    hue-rotate(-28deg);
 
-  transform:scale(1.08);
+  transition:
+    opacity 1.65s ease-in-out,
+    transform 7s ease-in-out;
 }
 
-/* =========================
-   COLOR GRADING
-========================= */
+.cinema-video-bg video.active{
+  opacity:1;
+  transform:scale(1.095);
+}
 
 .wins-red-branding{
   position:fixed;
@@ -80,9 +85,9 @@ body{
       rgba(18,0,0,.90),
       rgba(145,5,5,.66) 48%,
       rgba(8,0,0,.92)
-    );
+    ) !important;
 
-  opacity:.96;
+  opacity:.96 !important;
 }
 
 .cinema-color-grade{
@@ -106,7 +111,7 @@ body{
       circle at 80% 78%,
       rgba(255,194,45,.24),
       transparent 52%
-    );
+    ) !important;
 }
 
 .cinema-vignette{
@@ -114,64 +119,24 @@ body{
   inset:0;
   z-index:-23;
   pointer-events:none;
+  opacity:.88 !important;
 
   background:
-    radial-gradient(circle at center, transparent 0 58%, rgba(0,0,0,.58) 100%);
+    radial-gradient(circle at center, transparent 0 58%, rgba(0,0,0,.48) 100%),
+    linear-gradient(to bottom, rgba(0,0,0,.08), rgba(0,0,0,.48));
 }
 
-/* =========================
-   FX
-========================= */
-
-.casino-fx{
+.cinema-grain{
   position:fixed;
   inset:0;
+  z-index:-22;
   pointer-events:none;
-  overflow:hidden;
-  z-index:-19;
+  opacity:.03 !important;
 }
 
-.casino-fx span{
-  position:absolute;
-  width:12px;
-  height:12px;
-  border-radius:50%;
-  background:#ffd76a;
-
-  opacity:.35;
-
-  filter:
-    blur(1px)
-    drop-shadow(0 0 10px rgba(255,200,70,.55));
-
-  animation:float 12s linear infinite;
-}
-
-.casino-fx span:nth-child(1){left:10%;top:110%;animation-delay:0s;}
-.casino-fx span:nth-child(2){left:25%;top:120%;animation-delay:2s;}
-.casino-fx span:nth-child(3){left:40%;top:115%;animation-delay:4s;}
-.casino-fx span:nth-child(4){left:60%;top:130%;animation-delay:1s;}
-.casino-fx span:nth-child(5){left:78%;top:118%;animation-delay:6s;}
-
-@keyframes float{
-  from{
-    transform:translateY(0) scale(.8);
-    opacity:0;
-  }
-
-  10%{
-    opacity:.45;
-  }
-
-  to{
-    transform:translateY(-130vh) scale(1.2);
-    opacity:0;
-  }
-}
-
-/* =========================
+/* =========================================================
    CARD
-========================= */
+   ========================================================= */
 
 .page{
   width:100%;
@@ -183,47 +148,43 @@ body{
   position:relative;
   z-index:1;
 
-  border:1px solid rgba(255,215,90,.58);
-
-  border-radius:30px;
+  border:1px solid rgba(255,215,90,.58) !important;
+  border-radius:28px;
 
   background:
     radial-gradient(circle at top, rgba(255,200,60,.16), transparent 34%),
-    linear-gradient(180deg, rgba(75,5,5,.98), rgba(10,1,1,.99));
+    linear-gradient(180deg, rgba(75,5,5,.98), rgba(10,1,1,.99)) !important;
 
   box-shadow:
     0 0 34px rgba(255,190,50,.28),
     0 0 80px rgba(140,0,0,.28),
-    inset 0 0 26px rgba(255,210,90,.10);
+    inset 0 0 26px rgba(255,210,90,.10) !important;
 
   padding:28px 22px;
   text-align:center;
   overflow:hidden;
 }
 
-/* =========================
-   BRAND
-========================= */
+/* =========================================================
+   LOGO
+   ========================================================= */
 
 .brand{
   margin-bottom:18px;
 }
 
 .brand .wins{
-  font-size:46px;
+  font-size:42px;
   font-weight:900;
+  letter-spacing:2px;
 
-  color:#e01616;
-
-  font-family:Georgia, serif;
-
-  letter-spacing:1px;
+  color:#e01616 !important;
 
   text-shadow:
     0 2px 0 #fff1b0,
     0 4px 0 #9b3a00,
     0 0 16px rgba(255,211,90,.95),
-    0 0 34px rgba(255,40,20,.75);
+    0 0 34px rgba(255,40,20,.75) !important;
 }
 
 .brand .crupiers{
@@ -231,96 +192,93 @@ body{
   font-family:Georgia, serif;
   font-style:italic;
 
-  color:#ffd76a;
+  color:#ffd76a !important;
 
   text-shadow:
     0 2px 0 #8a3100,
-    0 0 14px rgba(255,210,90,.95);
+    0 0 14px rgba(255,210,90,.95) !important;
 }
 
-/* =========================
+/* =========================================================
    BADGE
-========================= */
+   ========================================================= */
 
 .badge{
   display:inline-block;
-
   padding:8px 14px;
-
   border-radius:999px;
 
-  background:rgba(95,5,5,.62);
+  background:rgba(95,5,7,.50) !important;
 
-  border:1px solid rgba(255,205,70,.42);
+  border:1px solid rgba(255,211,107,.45) !important;
 
-  color:#ffd76a;
+  box-shadow:
+    0 0 16px rgba(255,177,38,.12) !important;
+
+  color:#ffd76a !important;
 
   font-size:13px;
   font-weight:700;
-
+  letter-spacing:.5px;
   margin-bottom:18px;
 }
 
-/* =========================
-   TITLES
-========================= */
+/* =========================================================
+   TEXTOS
+   ========================================================= */
 
 h1{
   font-size:31px;
   line-height:1.05;
   margin-bottom:16px;
   text-transform:uppercase;
+  color:#ffe8a8 !important;
 }
 
 h1 span{
-  color:#ffd76a;
+  color:#ffd76a !important;
 }
 
-/* =========================
+.subtitle,
+.note,
+.footer{
+  color:#ffe8a8 !important;
+}
+
+/* =========================================================
    AMOUNT
-========================= */
+   ========================================================= */
 
 .amount-box{
   margin:20px 0;
-
   padding:18px 14px;
-
   border-radius:22px;
 
   background:
     radial-gradient(circle at center, rgba(255,211,107,.10), transparent 58%),
-    linear-gradient(180deg, rgba(145,7,7,.58), rgba(31,4,4,.86));
+    linear-gradient(180deg, rgba(145,7,7,.58), rgba(31,4,4,.86)) !important;
 
-  border:1px solid rgba(255,211,107,.36);
+  border:1px solid rgba(255,211,107,.36) !important;
 }
 
 .amount-label{
   font-size:13px;
-  color:#f5dba0;
   margin-bottom:8px;
+  letter-spacing:.5px;
   text-transform:uppercase;
+
+  color:#ffd76a !important;
 }
 
 .amount{
   font-size:46px;
   font-weight:900;
-  color:#ffd76a;
+  color:#ffd76a !important;
 }
 
-/* =========================
-   TEXTS
-========================= */
-
-.subtitle{
-  font-size:16px;
-  color:#fff0c0;
-  line-height:1.45;
-  margin-bottom:20px;
-}
-
-/* =========================
+/* =========================================================
    STEPS
-========================= */
+   ========================================================= */
 
 .steps{
   display:grid;
@@ -334,28 +292,27 @@ h1 span{
   gap:10px;
   align-items:center;
 
-  background:rgba(76,6,6,.58);
+  background:rgba(76,6,6,.58) !important;
 
-  border:1px solid rgba(255,211,107,.26);
+  border:1px solid rgba(255,211,107,.26) !important;
 
   border-radius:15px;
-
   padding:12px;
 
-  font-size:14px;
-
-  color:#fff7e7;
+  color:#ffe8a8 !important;
 }
 
 .step b{
-  color:#ffd76a;
+  color:#ffd76a !important;
 }
 
-/* =========================
+/* =========================================================
    BUTTONS
-========================= */
+   ========================================================= */
 
-.cta{
+.cta,
+.webchat-btn{
+
   display:block;
   width:100%;
   border:none;
@@ -365,89 +322,68 @@ h1 span{
     linear-gradient(
       180deg,
       #fff3bd 0%,
-      #ffc83d 42%,
-      #d4740b 72%,
-      #8b2f00 100%
-    );
+      #f1ba3d 55%,
+      #b46a10 100%
+    ) !important;
 
-  color:#210404;
+  color:#1b0707 !important;
 
   padding:16px 18px;
-
   border-radius:18px;
 
   font-size:17px;
   font-weight:900;
-
   text-transform:uppercase;
 
-  border:1px solid rgba(255,226,120,.75);
+  border:1px solid rgba(255,211,107,.55) !important;
 
   box-shadow:
-    0 0 24px rgba(255,196,55,.55),
-    0 0 46px rgba(190,18,18,.28),
-    inset 0 1px 0 rgba(255,255,255,.55);
+    0 0 26px rgba(255,204,84,.42),
+    inset 0 1px 0 rgba(255,255,255,.38) !important;
 
   margin-top:10px;
-
-  transition:.2s;
 }
 
-.cta:hover{
-  transform:translateY(-2px) scale(1.01);
-  filter:brightness(1.08);
-}
-
-/* =========================
+/* =========================================================
    FOOTER
-========================= */
-
-.note{
-  margin-top:14px;
-  font-size:12px;
-  color:rgba(255,255,255,.56);
-  line-height:1.35;
-}
+   ========================================================= */
 
 .footer{
   margin-top:16px;
   text-align:center;
   font-size:12px;
-  color:rgba(255,255,255,.52);
 }
 
-/* =========================
+/* =========================================================
    WEBCHAT GLOW
-========================= */
+   ========================================================= */
 
 .webchat-glow{
+  display:none;
   position:fixed;
   right:16px;
   bottom:12px;
-
   width:120px;
   height:120px;
-
   border-radius:50%;
 
   background:
     radial-gradient(
       circle,
-      rgba(255,210,80,.68) 0%,
-      rgba(180,10,10,.24) 55%,
+      rgba(255,211,107,.62) 0%,
+      rgba(150,8,8,.20) 55%,
       transparent 75%
-    );
+    ) !important;
 
   filter:blur(6px);
 
   z-index:9998;
-
   pointer-events:none;
 }
 
-/* =========================
+/* =========================================================
    MOBILE
-========================= */
+   ========================================================= */
 
 @media(max-width:720px){
 
@@ -475,7 +411,7 @@ h1 span{
 <body>
 
 <div class="cinema-video-bg">
-  <video autoplay muted loop playsinline>
+  <video autoplay muted loop playsinline class="active">
     <source src="video2.mp4" type="video/mp4">
   </video>
 </div>
@@ -483,76 +419,80 @@ h1 span{
 <div class="wins-red-branding"></div>
 <div class="cinema-color-grade"></div>
 <div class="cinema-vignette"></div>
-
-<div class="casino-fx">
-  <span></span>
-  <span></span>
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
+<div class="cinema-grain"></div>
 
 <main class="page">
 
 <section class="card">
 
 <div class="brand">
-  <div class="wins">LUCK</div>
-  <div class="crupiers">Crupiers</div>
+<div class="wins">LUCK</div>
+<div class="crupiers">Crupiers</div>
 </div>
 
 <div class="badge">
-  LÍNEAS DE ATENCIÓN LUCK
+LÍNEAS DE ATENCIÓN LUCK
 </div>
 
 <h1>
-  ¿Perdiste nuestro <span>contacto?</span>
+¿Perdiste nuestro <span>contacto?</span>
 </h1>
 
 <div class="amount-box">
-  <div class="amount-label">
-    Elegí una línea disponible
-  </div>
+<div class="amount-label">
+Elegí una línea disponible
+</div>
 
-  <div class="amount">
-    LUCK
-  </div>
+<div class="amount">
+LUCK
+</div>
 </div>
 
 <p class="subtitle">
-  Si perdiste nuestro número, tocá una línea disponible y volvé a escribirnos por WhatsApp.
+Si perdiste nuestro número, tocá una línea disponible y volvé a escribirnos por WhatsApp.
 </p>
 
 <div class="steps">
-  <div class="step">
-    Recuperá una <b>línea de atención</b>
-  </div>
 
-  <div class="step">
-    Escribinos por <b>WhatsApp o Webchat</b>
-  </div>
+<div class="step">
+<span>◆</span>
+<span>
+Recuperá una <b>línea de atención</b>
+</span>
+</div>
 
-  <div class="step">
-    Guardá el contacto para la próxima
-  </div>
+<div class="step">
+<span>◆</span>
+<span>
+Escribinos por <b>WhatsApp o Webchat</b>
+</span>
+</div>
+
+<div class="step">
+<span>◆</span>
+<span>
+Guardá el contacto para la próxima
+</span>
+</div>
+
 </div>
 
 <button class="cta">
-  Ver líneas de WhatsApp
+Ver líneas de WhatsApp
 </button>
 
-<button class="cta">
-  Abrir Webchat
+<button class="cta webchat-btn">
+Abrir Webchat
 </button>
 
 <p class="note">
-  Usá estas líneas si perdiste nuestro contacto o necesitás volver a comunicarte.
+Usá estas líneas si perdiste nuestro contacto o necesitás volver a comunicarte.
 </p>
 
 </section>
 
 <div class="footer">
-  LUCK CRUPIERS · Atención activa
+LUCK CRUPIERS · Atención activa
 </div>
 
 </main>
